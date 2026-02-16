@@ -1,6 +1,7 @@
 from sqlmodel import Session, select
 from app.models.user import User
 from app.schemas.user import UserCreate
+from app.core.security import verify_password
 
 class UserRepository:
     def __init__(self, session: Session):
@@ -19,3 +20,14 @@ class UserRepository:
         self.session.commit()
         self.session.refresh(db_user)
         return db_user
+    
+    def authenticate(self, email: str, password: str) -> User | None:
+        """
+        Check if user exists and password matches.
+        """
+        user = self.get_by_email(email)
+        if not user:
+            return None
+        if not verify_password(password, user.hashed_password):
+            return None
+        return user
