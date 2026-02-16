@@ -2,14 +2,14 @@ services:
   # Database Service
   db:
     image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     container_name: subtrack-db
     restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=subtrack
     ports:
-      - "5433:5432"
+      - "5433:5432" 
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -43,7 +43,14 @@ services:
     ports:
       - "8001:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/subtrack
+      # --- CORREÇÃO AQUI ---
+      # O Pydantic Settings exige estas variáveis separadas:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=subtrack
+      - POSTGRES_SERVER=db
+      - POSTGRES_PORT=5432
+      # ---------------------
       - REDIS_URL=redis://redis:6379/0
     depends_on:
       db:
