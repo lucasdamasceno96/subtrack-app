@@ -1,7 +1,10 @@
 import uuid
-from typing import Optional
+from typing import Optional, List, TYPE_CHECKING
 from datetime import datetime
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, SQLModel, Relationship
+
+if TYPE_CHECKING:
+    from app.models.subscription import Subscription
 
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True, max_length=255)
@@ -17,5 +20,7 @@ class User(UserBase, table=True):
     # Audit fields
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    subscriptions: List["Subscription"] = Relationship(back_populates="user")
 
     __tablename__ = "users"
