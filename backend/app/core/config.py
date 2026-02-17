@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "SubTrack API"
+    API_V1_STR: str = "/api/v1"
     
     # Database
     POSTGRES_USER: str
