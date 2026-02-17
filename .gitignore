@@ -5,3 +5,4 @@ venv/
 .idea/
 .vscode/
 postgres_data/
+llm-context.md

@@ -1,7 +1,11 @@
+# backend/app/main.py
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from app.core.database import engine
 from sqlmodel import SQLModel
+
+# Import Routes
+from app.api.v1.api import api_router
 
 # Import the router
 from app.api.v1.endpoints import auth
@@ -25,5 +29,5 @@ app = FastAPI(
 def health_check():
     return {"status": "ok", "message": "SubTrack API is running and connected to DB"}
 
-# Include the router with a prefix
+# Include routes
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
