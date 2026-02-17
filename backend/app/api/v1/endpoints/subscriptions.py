@@ -1,9 +1,10 @@
+# backend/app/api/v1/endpoints/subscriptions.py
 from typing import List
 from uuid import UUID
 from fastapi import APIRouter, Depends, status
 from sqlmodel import Session
 
-from app.api.deps import get_db, get_current_user
+from app.api.deps import get_session, get_current_user
 from app.models.user import User
 from app.schemas.subscription import SubscriptionCreate, SubscriptionRead, SubscriptionUpdate
 from app.services.subscription_service import SubscriptionService
@@ -13,7 +14,7 @@ router = APIRouter()
 @router.post("/", response_model=SubscriptionRead, status_code=status.HTTP_201_CREATED)
 def create_subscription(
     *,
-    session: Session = Depends(get_db),
+    session: Session = Depends(get_session),
     subscription_in: SubscriptionCreate,
     current_user: User = Depends(get_current_user)
 ):
@@ -25,7 +26,7 @@ def create_subscription(
 
 @router.get("/", response_model=List[SubscriptionRead])
 def read_subscriptions(
-    session: Session = Depends(get_db),
+    session: Session = Depends(get_session),
     current_user: User = Depends(get_current_user),
     skip: int = 0,
     limit: int = 100
@@ -39,7 +40,7 @@ def read_subscriptions(
 @router.get("/{id}", response_model=SubscriptionRead)
 def read_subscription(
     *,
-    session: Session = Depends(get_db),
+    session: Session = Depends(get_session),
     id: UUID,
     current_user: User = Depends(get_current_user)
 ):
@@ -52,7 +53,7 @@ def read_subscription(
 @router.patch("/{id}", response_model=SubscriptionRead)
 def update_subscription(
     *,
-    session: Session = Depends(get_db),
+    session: Session = Depends(get_session),
     id: UUID,
     subscription_in: SubscriptionUpdate,
     current_user: User = Depends(get_current_user)
@@ -66,7 +67,7 @@ def update_subscription(
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_subscription(
     *,
-    session: Session = Depends(get_db),
+    session: Session = Depends(get_session),
     id: UUID,
     current_user: User = Depends(get_current_user)
 ):

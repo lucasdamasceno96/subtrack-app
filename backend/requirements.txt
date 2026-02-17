@@ -8,3 +8,5 @@ python-jose[cryptography]
 python-multipart
 pydantic-settings
 email-validator
+psycopg2-binary
+pytest

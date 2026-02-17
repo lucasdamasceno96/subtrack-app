@@ -17,7 +17,7 @@ class Subscription(SQLModel, table=True):
     status: str = Field(default="active")
     
     # Foreign Key
-    user_id: UUID = Field(foreign_key="user.id", nullable=False)
+    user_id: UUID = Field(foreign_key="users.id", nullable=False)
     
     # Relationship
     user: Optional["User"] = Relationship(back_populates="subscriptions")
