@@ -33,42 +33,47 @@ The project is structured into layers to separate concerns:
 - Docker and Docker Compose installed.
 - Python 3.12+ (for local development).
 
-### Installation
+---
 
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/lucasdamasceno96/subtrack-api.git](https://github.com/lucasdamasceno96/subtrack-app.git)
-   cd subtrack-app
-   ```
+### 🚀 Installation
 
-````
+1. **Clone the repository:**
 
-2. Setup environment variables:
+```bash
+git clone https://github.com/lucasdamasceno96/subtrack-app.git
+cd subtrack-app
+
+```
+
+2. **Setup environment variables:**
 
 ```bash
 cp .env.example .env
 
 ```
 
-3. Run the application with Docker:
+3. **Run the application with Docker:**
 
 ```bash
 docker-compose up --build
 
 ```
 
-The API will be available at `http://localhost:8000`. You can access the interactive documentation (Swagger UI) at `/docs`.
-
-## 📜 Development Guidelines
-
-- **Commits:** We follow [Conventional Commits](https://www.conventionalcommits.org/).
-- **Language:** All code, variables, and comments are in **English**.
-- **Linting:** Run `ruff check .` before committing.
-- **Testing:** Run `pytest` to ensure all features are working as expected.
+A aplicação estará disponível em `http://localhost:8000`. Você pode acessar a documentação interativa (Swagger UI) em `http://localhost:8000/docs`.
 
 ---
 
-Developed as a part of a deep-learning journey in Backend Engineering.
+## 📜 Development Guidelines
 
-```
-````
+Para manter a consistência do projeto, siga estas diretrizes:
+
+- **Commits:** Seguimos o padrão [Conventional Commits](https://www.conventionalcommits.org/).
+- **Language:** Todo o código, variáveis e comentários devem ser em **Inglês**.
+- **Linting:** Execute `ruff check .` antes de realizar o commit.
+- **Testing:** Utilize `pytest` para garantir que todas as funcionalidades estão operando corretamente.
+
+---
+
+_Developed as a part of a deep-learning journey in Backend Engineering._
+
+---
