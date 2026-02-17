@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship
 
 if TYPE_CHECKING:
-    from app.models.subscription import Subscript
+    from app.models.subscription import Subscription
 
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True, max_length=255)
